@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RotateButton : MonoBehaviour
+public class RotateButton : Abstract_Interactable
 {
-     // reference to rotating object
-     private IRotatable m_RotatingObject;
-
      // Materials for color swapping
      [SerializeField]
      private Material defaultMat;
@@ -60,7 +57,13 @@ public class RotateButton : MonoBehaviour
 
      private void OnMouseUpAsButton()
      {
+          TriggerInteraction();
+     }
+
+     protected override void TriggerInteraction()
+     {
           m_RotatingObject.ToggleRotation();
+          base.InvokeInteractionEvent();
      }
 
 }

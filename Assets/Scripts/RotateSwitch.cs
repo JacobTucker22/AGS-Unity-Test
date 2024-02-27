@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateSwitch : MonoBehaviour
+public class RotateSwitch : Abstract_Interactable
 {
-     // reference to rotating object
-     private IRotatable m_RotatingObject;
-
      // Angles for active and inactive positions
      private int inactivePos = -135;
      private int activePos = -45;
@@ -57,12 +54,7 @@ public class RotateSwitch : MonoBehaviour
                mouseUpPos = Input.mousePosition.y;
                if (mouseUpPos - mouseDownPos > mouseSensitivity)
                {
-                    m_Rotation = new Vector3(m_Rotation.x, m_Rotation.y, activePos);
-                    m_Origin.rotation = Quaternion.Euler(m_Rotation);
-                    isActive = true;
-                    activeTimer = 2.0f;
-
-                    m_RotatingObject.ReverseRotation();
+                    TriggerInteraction();
                }
           }
      }
@@ -80,5 +72,20 @@ public class RotateSwitch : MonoBehaviour
                     isActive = false;
                }
           }
+     }
+
+     // Switch's overridden Interaction logic
+     // Sets switch to active position, sets active flag and timer
+     // Triggers the rotating object's direction and Invokes the Interaction event
+     protected override void TriggerInteraction()
+     {
+          m_Rotation = new Vector3(m_Rotation.x, m_Rotation.y, activePos);
+          m_Origin.rotation = Quaternion.Euler(m_Rotation);
+          isActive = true;
+          activeTimer = 2.0f;
+
+          m_RotatingObject.ReverseRotation();
+
+          base.InvokeInteractionEvent();
      }
 }
