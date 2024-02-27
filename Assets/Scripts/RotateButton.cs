@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class RotateButton : MonoBehaviour
 {
+     // reference to rotating object
+     private IRotatable m_RotatingObject;
+
      // Materials for color swapping
      [SerializeField]
      private Material defaultMat;
@@ -22,6 +25,7 @@ public class RotateButton : MonoBehaviour
      {
           // Get button's sprite renderer
           m_Renderer = GetComponentInChildren<Renderer>();
+          m_RotatingObject = GameObject.Find("RotatingObject").GetComponent<IRotatable>();
      }
 
      // If the button has not been pressed, hovering will apply hovering material
@@ -52,6 +56,11 @@ public class RotateButton : MonoBehaviour
      {
           m_Renderer.material = isHovering ? hoverMat : defaultMat;
           isPressed = false;
+     }
+
+     private void OnMouseUpAsButton()
+     {
+          m_RotatingObject.ToggleRotation();
      }
 
 }

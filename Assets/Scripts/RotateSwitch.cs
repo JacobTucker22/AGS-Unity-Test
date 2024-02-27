@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateSwitch : MonoBehaviour
 {
+     // reference to rotating object
+     private IRotatable m_RotatingObject;
+
      // Angles for active and inactive positions
      private int inactivePos = -135;
      private int activePos = -45;
@@ -27,6 +31,7 @@ public class RotateSwitch : MonoBehaviour
           // Cache the origin's transform and this transform's rotation angles
           m_Origin = this.transform.parent.transform;
           m_Rotation = transform.rotation.eulerAngles;
+          m_RotatingObject = GameObject.Find("RotatingObject").GetComponent<IRotatable>();
      }
 
      private void Update()
@@ -56,6 +61,8 @@ public class RotateSwitch : MonoBehaviour
                     m_Origin.rotation = Quaternion.Euler(m_Rotation);
                     isActive = true;
                     activeTimer = 2.0f;
+
+                    m_RotatingObject.ReverseRotation();
                }
           }
      }
