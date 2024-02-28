@@ -52,7 +52,7 @@ public class RotateSwitch : Abstract_Interactable
           if (!isActive)
           {
                mouseUpPos = Input.mousePosition.y;
-               if (mouseUpPos - mouseDownPos > mouseSensitivity)
+               if (mouseUpPos - mouseDownPos > mouseSensitivity && isInteractable)
                {
                     TriggerInteraction();
                }

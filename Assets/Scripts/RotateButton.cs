@@ -29,8 +29,11 @@ public class RotateButton : Abstract_Interactable
      // If the button was pressed, exits and re-enters while holding the mouse, it will stay as pressed material
      private void OnMouseEnter()
      {
-          m_Renderer.material = isPressed ? pressedMat : hoverMat;
-          isHovering = true;
+          if (isInteractable)
+          {
+               m_Renderer.material = isPressed ? pressedMat : hoverMat;
+               isHovering = true;
+          }
      }
 
      // If the button is pressed on mouse exiting collider, it will stay pressed until mouse button is released
@@ -44,20 +47,36 @@ public class RotateButton : Abstract_Interactable
      // On pressing the button, the pressed material is applied
      private void OnMouseDown()
      {
-          m_Renderer.material = pressedMat;
-          isPressed = true;
+          if (isInteractable)
+          {
+               m_Renderer.material = pressedMat;
+               isPressed = true;
+          }
      }
 
      // If the mouse is released while hovering, the hover material is applied, other wise the default material is applied
      private void OnMouseUp()
      {
-          m_Renderer.material = isHovering ? hoverMat : defaultMat;
-          isPressed = false;
+          if (isInteractable)
+          {
+               m_Renderer.material = isHovering ? hoverMat : defaultMat;
+               isPressed = false;
+          }
      }
 
      private void OnMouseUpAsButton()
      {
-          TriggerInteraction();
+          if (isInteractable)
+          {
+               TriggerInteraction();
+               if(!isInteractable)
+               {
+                    // Resets color state if interactable is turned off
+                    m_Renderer.material = defaultMat;
+                    isHovering = false;
+                    isPressed = false;
+               }
+          }
      }
 
      protected override void TriggerInteraction()

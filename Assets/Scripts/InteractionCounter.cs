@@ -17,19 +17,31 @@ public class InteractionCounter : MonoBehaviour
      private void Awake()
      {
           if(sub_Interactable != null)
+          {
                sub_Interactable.InteractionEvent += OnInteraction;
+               sub_Interactable.ResetEvent += OnReset;
+          }
           m_NumInteractionText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
      }
 
      private void OnDestroy()
      {
           if (sub_Interactable != null)
+          {
                sub_Interactable.InteractionEvent -= OnInteraction;
+               sub_Interactable.ResetEvent -= OnReset;
+          }
      }
      // Callback for subscribed interaciton event
      private void OnInteraction()
      {
           numInteractions++;
+          m_NumInteractionText.text = numInteractions.ToString();
+     }
+
+     public void OnReset()
+     {
+          numInteractions = 0;
           m_NumInteractionText.text = numInteractions.ToString();
      }
 }
