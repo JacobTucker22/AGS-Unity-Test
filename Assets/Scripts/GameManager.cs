@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
      // Singleton Instance
      public GameManager instance { get; private set; }
 
+     // config values reference
+     [SerializeField]
+     private GameConfig_SO config;
+
      // Set the UI game object in the editor
      // This UI becomes enabled when the total number of interactions reaches the max
      [SerializeField]
@@ -52,7 +56,7 @@ public class GameManager : MonoBehaviour
      private void OnInteraction()
      {
           numTotalInteractions++;
-          if(numTotalInteractions >= 10)
+          if(numTotalInteractions >= config.maxNumTries)
           {
                tryAgainUI.SetActive(true);
                SetAllInteractables(false);

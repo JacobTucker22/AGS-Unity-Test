@@ -1106,11 +1106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d273e864073cfb944984c281083b8b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: a6c12e05ae70a134593187fc5d3d6130, type: 2}
   tryAgainUI: {fileID: 1661177868}
   interactables:
   - {fileID: 2135410418}
   - {fileID: 2126438795}
-  numTotalInteractions: 0
 --- !u!4 &1289507899
 Transform:
   m_ObjectHideFlags: 0
@@ -1464,6 +1464,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3179063554928363771, guid: eb6e1885adf2adf4eba302f85dd17188, type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: a6c12e05ae70a134593187fc5d3d6130, type: 2}
     - target: {fileID: 6439161192056282935, guid: eb6e1885adf2adf4eba302f85dd17188, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1581,6 +1585,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1518250992605948784, guid: a0bab7e9739235c429fc873cfcab52d7, type: 3}
+      propertyPath: config
+      value: 
+      objectReference: {fileID: 11400000, guid: a6c12e05ae70a134593187fc5d3d6130, type: 2}
     - target: {fileID: 7424533688607293990, guid: a0bab7e9739235c429fc873cfcab52d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5

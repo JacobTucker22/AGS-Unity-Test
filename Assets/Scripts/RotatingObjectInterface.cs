@@ -5,6 +5,9 @@ using UnityEngine;
 // Logic and IRotatable implementation portion of Rotating Object class
 public partial class RotatingObject : IRotatable
 {
+     // Reference to config values
+     [SerializeField]
+     private GameConfig_SO config;
      // Behavior state flags
      [SerializeField]
      private bool isRotating = false;
@@ -14,8 +17,7 @@ public partial class RotatingObject : IRotatable
      // Rotation Speeds
      // Note: Could move const to SO if 
      [SerializeField]
-     private float rotationSpeed = -300.0f;
-     private float initialRotationSpeed = -300f;
+     private float rotationSpeed = 0;
 
      // ============= IRotatable functions ====================
      // Toggle isRotating Flag
@@ -36,14 +38,14 @@ public partial class RotatingObject : IRotatable
      // Toggles reversed flag and reverses rotation speed
      public void ReverseRotation()
      {
-          rotationSpeed = -rotationSpeed;
+          rotationSpeed = -config.InitRotationSpeed;
           isReversed = !isReversed;
      }
      // Sets isReversed flag and rotation speed direction directly (negative or positive initial rotation speed)
      public void SetIsReversed(bool isReversed)
      {
           this.isReversed = isReversed;
-          rotationSpeed = this.isReversed ? -initialRotationSpeed : initialRotationSpeed;
+          rotationSpeed = this.isReversed ? -config.InitRotationSpeed : config.InitRotationSpeed;
      }
      // Resets reverse and rotating flags to false
      // Resets transform's rotation to default

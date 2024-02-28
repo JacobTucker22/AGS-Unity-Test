@@ -5,23 +5,26 @@ using UnityEngine;
 
 public class RotateSwitch : Abstract_Interactable
 {
+     [SerializeField]
+     private GameConfig_SO config;
+
      // Angles for active and inactive positions
-     private int inactivePos = -135;
-     private int activePos = -45;
+     private const int INACTIVE_POS_ANGLE = -135;
+     private const int ACTIVE_POS_ANGLE = -45;
      // Actual rotation and origin transform to rotate. (acts as a pivot)
      private Vector3 m_Rotation;
      private Transform m_Origin;
 
      // Active state and timer
      private bool isActive = false;
-     private float activeTimer = 2.0f;
+     private float activeTimer = 0.0f;
 
      // Mouse positions for switch interaction behavior
      // Mouse sensitivity affects distance mouse must be drug while holding button
      private float mouseDownPos = 0.0f;
      private float mouseUpPos = 0.0f;
      [SerializeField]
-     private float mouseSensitivity = 5.0f;
+     private const float MOUSE_SENSITIVITY = 5.0f;
 
      private void Awake()
      {
@@ -29,6 +32,10 @@ public class RotateSwitch : Abstract_Interactable
           m_Origin = this.transform.parent.transform;
           m_Rotation = transform.rotation.eulerAngles;
           m_RotatingObject = GameObject.Find("RotatingObject").GetComponent<IRotatable>();
+
+
+          // Initialize timer time from config SO
+          activeTimer = config.switchTimer;
      }
 
      private void Update()
@@ -52,7 +59,7 @@ public class RotateSwitch : Abstract_Interactable
           if (!isActive)
           {
                mouseUpPos = Input.mousePosition.y;
-               if (mouseUpPos - mouseDownPos > mouseSensitivity && isInteractable)
+               if (mouseUpPos - mouseDownPos > MOUSE_SENSITIVITY && isInteractable)
                {
                     TriggerInteraction();
                }
@@ -67,7 +74,7 @@ public class RotateSwitch : Abstract_Interactable
                activeTimer -= Time.deltaTime;
                if (activeTimer < 0.0f)
                {
-                    m_Rotation = new Vector3(m_Rotation.x, m_Rotation.y, inactivePos);
+                    m_Rotation = new Vector3(m_Rotation.x, m_Rotation.y, INACTIVE_POS_ANGLE);
                     m_Origin.rotation = Quaternion.Euler(m_Rotation);
                     isActive = false;
                }
@@ -79,10 +86,10 @@ public class RotateSwitch : Abstract_Interactable
      // Triggers the rotating object's direction and Invokes the Interaction event
      protected override void TriggerInteraction()
      {
-          m_Rotation = new Vector3(m_Rotation.x, m_Rotation.y, activePos);
+          m_Rotation = new Vector3(m_Rotation.x, m_Rotation.y, ACTIVE_POS_ANGLE);
           m_Origin.rotation = Quaternion.Euler(m_Rotation);
           isActive = true;
-          activeTimer = 2.0f;
+          activeTimer = config.switchTimer;
 
           m_RotatingObject.ReverseRotation();
 
