@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameConfig_SO : ScriptableObject
 {
      // Rotation speed
-     public float InitRotationSpeed = -300.0f;
+     public float RotationSpeed = -300.0f;
 
      // Switch timer
      public float switchTimer = 2.0f;

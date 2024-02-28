@@ -38,14 +38,14 @@ public partial class RotatingObject : IRotatable
      // Toggles reversed flag and reverses rotation speed
      public void ReverseRotation()
      {
-          rotationSpeed = -config.InitRotationSpeed;
+          rotationSpeed = -config.RotationSpeed;
           isReversed = !isReversed;
      }
      // Sets isReversed flag and rotation speed direction directly (negative or positive initial rotation speed)
      public void SetIsReversed(bool isReversed)
      {
           this.isReversed = isReversed;
-          rotationSpeed = this.isReversed ? -config.InitRotationSpeed : config.InitRotationSpeed;
+          rotationSpeed = this.isReversed ? -config.RotationSpeed : config.RotationSpeed;
      }
      // Resets reverse and rotating flags to false
      // Resets transform's rotation to default
