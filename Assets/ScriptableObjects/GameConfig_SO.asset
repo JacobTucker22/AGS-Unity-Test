@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae8edb52d66c604d81265b9c02ea00b, type: 3}
   m_Name: GameConfig_SO
   m_EditorClassIdentifier: 
-  InitRotationSpeed: -320
+  RotationSpeed: -320
   switchTimer: 2
   maxNumTries: 10

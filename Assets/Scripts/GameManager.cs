@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
      // This UI becomes enabled when the total number of interactions reaches the max
      [SerializeField]
      private GameObject tryAgainUI;
+     // Reference to end game black screen game object
+     [SerializeField]
+     private GameObject endScreenUI;
 
      // Add interactable objects to this list in the editor to be counted in total count
      [SerializeField]
@@ -87,6 +90,8 @@ public class GameManager : MonoBehaviour
      // Exits game in editor or runtime
      public void ExitGame()
      {
+          // Turns screen black for nicer looking shutdown.
+          endScreenUI.SetActive(true);
           #if UNITY_EDITOR
                UnityEditor.EditorApplication.isPlaying = false;
           #else
