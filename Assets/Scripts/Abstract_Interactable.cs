@@ -23,6 +23,8 @@ public abstract class Abstract_Interactable : MonoBehaviour
      public void ResetInteractions()
      {
           isInteractable = true;
+          // Reset this interactables rotating object
+          m_RotatingObject.Reset();
           ResetEvent?.Invoke();
      }
 

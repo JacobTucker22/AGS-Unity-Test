@@ -7,5 +7,9 @@ using UnityEngine;
 public interface IRotatable
 {
      public void ToggleRotation();
+     public void SetIsRotating(bool isRotating);
+     public void SetRotation(Quaternion rotation);
      public void ReverseRotation();
+     public void SetIsReversed(bool isReversed);
+     public void Reset();
 }
