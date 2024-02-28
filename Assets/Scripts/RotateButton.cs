@@ -13,14 +13,17 @@ public class RotateButton : Abstract_Interactable
      [SerializeField]
      private Material pressedMat;
 
+     // Reference to renderer for material swapping
      private Renderer m_Renderer;
-
-     private bool isHovering = false, isPressed = false;
+     
+     // Behavior flags for determining which color to present
+     private bool isHovering = false;
+     private bool isPressed = false;
 
      
      private void Awake()
      {
-          // Get button's sprite renderer
+          // Get button's sprite renderer and Rotating Object to control
           m_Renderer = GetComponentInChildren<Renderer>();
           m_RotatingObject = GameObject.Find("RotatingObject").GetComponent<IRotatable>();
      }
@@ -63,7 +66,7 @@ public class RotateButton : Abstract_Interactable
                isPressed = false;
           }
      }
-
+     // When mouse is pressed and released over the button, triggers the button interaction
      private void OnMouseUpAsButton()
      {
           if (isInteractable)
@@ -78,7 +81,7 @@ public class RotateButton : Abstract_Interactable
                }
           }
      }
-
+     // Interaction calls rotating object to toggle rotation and invokes interaction event
      protected override void TriggerInteraction()
      {
           m_RotatingObject.ToggleRotation();

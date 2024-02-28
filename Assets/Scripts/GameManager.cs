@@ -1,12 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Singleton Game Manager
+// References to a list of Interactable objects set in the editor and the Try Again UI game object
 public class GameManager : MonoBehaviour
 {
-     private GameManager instance;
+     // Singleton Instance
+     public GameManager instance { get; private set; }
 
      // Set the UI game object in the editor
+     // This UI becomes enabled when the total number of interactions reaches the max
      [SerializeField]
      private GameObject tryAgainUI;
 
@@ -14,12 +17,14 @@ public class GameManager : MonoBehaviour
      [SerializeField]
      private List<Abstract_Interactable> interactables;
 
-     [SerializeField]
+     // Total number of interactions
      private int numTotalInteractions = 0;
 
      private void Awake()
      {
+          // Initialize singelton instance
           instance = this;
+          // Subscribe to interactable's events
           if(interactables.Count > 0)
           {
                foreach(Abstract_Interactable interactable in interactables)
@@ -31,6 +36,7 @@ public class GameManager : MonoBehaviour
 
      private void OnDestroy()
      {
+          // Unsubscribe to interactable events
           if (interactables.Count > 0)
           {
                foreach (Abstract_Interactable interactable in interactables)
@@ -40,6 +46,9 @@ public class GameManager : MonoBehaviour
           }
      }
 
+     // Call back for interactable event
+     // Increments the total number of interactions
+     // Checks for max number of interactions to trigger reset and Try Again UI
      private void OnInteraction()
      {
           numTotalInteractions++;
@@ -50,6 +59,7 @@ public class GameManager : MonoBehaviour
           }
      }
 
+     // Sets all interactables enabled flag
      private void SetAllInteractables(bool isEnabled)
      {
           if(interactables.Count > 0)
@@ -60,7 +70,7 @@ public class GameManager : MonoBehaviour
                }
           }
      }
-
+     // Reset total number of interactions, all interactables in list, and disables Try Again UI
      public void ResetGame()
      {
           numTotalInteractions = 0;
@@ -70,7 +80,7 @@ public class GameManager : MonoBehaviour
           }
           tryAgainUI.SetActive(false);
      }
-
+     // Exits game in editor or runtime
      public void ExitGame()
      {
           #if UNITY_EDITOR

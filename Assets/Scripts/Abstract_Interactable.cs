@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public abstract class Abstract_Interactable : MonoBehaviour
@@ -15,11 +12,13 @@ public abstract class Abstract_Interactable : MonoBehaviour
      public event Action InteractionEvent;
      public event Action ResetEvent;
 
+     // Sets interactable flag
      public void SetInteractableFlag(bool isActive)
      {
           isInteractable = isActive;
      }
-
+     
+     // Resets interactable flag to true, calls rotating object's reset function, and triggers reset event
      public void ResetInteractions()
      {
           isInteractable = true;
@@ -28,13 +27,14 @@ public abstract class Abstract_Interactable : MonoBehaviour
           ResetEvent?.Invoke();
      }
 
+     // Wrapper method to invoke Interaction event for derived classes
      protected virtual void InvokeInteractionEvent()
      {
           InteractionEvent?.Invoke();
      }
 
 
-     // Virtual interaction logic
+     // Virtual interaction function
      protected abstract void TriggerInteraction();
 
 

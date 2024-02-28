@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
+// Class that keeps track of number of interactions and UI display of number of interactions
 public class InteractionCounter : MonoBehaviour
 {
-     // Set interactable object in Editor\
+     // Set interactable object in Editor
      [SerializeField]
      private Abstract_Interactable sub_Interactable;
-     // For counting and displaying number of interactions
+     // Number of interactions
      private int numInteractions = 0;
+     // UI Text reference that displays number of interactions
      private TMP_Text m_NumInteractionText;
 
      // Setup caallback for subscribed interaction event
@@ -24,6 +23,7 @@ public class InteractionCounter : MonoBehaviour
           m_NumInteractionText = GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
      }
 
+     // Unsubscribe callbacks
      private void OnDestroy()
      {
           if (sub_Interactable != null)
@@ -33,12 +33,13 @@ public class InteractionCounter : MonoBehaviour
           }
      }
      // Callback for subscribed interaciton event
+     // Increments internal number of interactions and updates UI text
      private void OnInteraction()
      {
           numInteractions++;
           m_NumInteractionText.text = numInteractions.ToString();
      }
-
+     // Resets number of interactions and UI Text
      public void OnReset()
      {
           numInteractions = 0;
